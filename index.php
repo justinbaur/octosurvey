@@ -53,18 +53,17 @@
 				$status = "Welcome, " . $_POST["username"];
 			}
 		}
-
 	?>
 	
 	<div id="statusbox">
 		Status: <?= $status ?>
 	</div>
 	
-	<?php
-		
+	<?php	
 		if($correctlyLogged == true || $alreadyLogged == true){
 	?>
 		<a href="partials/logout.php" id="logoutButton">Logout</a>
+		
 		<ul class="menu">
 		    <li><a href="#/">Home</a></li>
 		    <li><a href="#/Membership">Become A Member</a></li>
