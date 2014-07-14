@@ -10,7 +10,7 @@ angular.module('octosurvey', [
   'octosurvey.controllers'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/', {templateUrl: 'index.php', controller: 'MyCtrl1'});
+  $routeProvider.when('/', {templateUrl: 'view/home.html', controller: 'MyCtrl1'});
   $routeProvider.when('/CreateAccount', {templateUrl: 'view/create.html', controller: 'MyCtrl2'});
   $routeProvider.when('/Membership', {templateUrl: 'view/member.html', controller: 'MyCtrl2'});
   $routeProvider.when('/Support', {templateUrl: 'view/support.html', controller: 'MyCtrl2'});
