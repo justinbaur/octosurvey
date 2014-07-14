@@ -62,7 +62,7 @@
 	<?php	
 		if($correctlyLogged == true || $alreadyLogged == true){
 	?>
-		<a href="partials/logout.php" id="logoutButton">Logout</a>
+		<a href="logout.php" id="logoutButton">Logout</a>
 		
 		<ul class="menu">
 		    <li><a href="#/">Home</a></li>
@@ -84,7 +84,7 @@
 		    <li><a href="#/About">About Us</a></li>    
 		</ul>
 		
-		<?php include("partials/authentication.html"); ?> 
+		<?php include("view/authentication.html"); ?> 
 		<div ng-view></div>
 	<?php } ?>
 </body>
