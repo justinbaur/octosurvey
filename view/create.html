@@ -1,9 +1,9 @@
 <div id="createDisplay">
 	<p>Create an Account!</p>
-	<form class="memberAdd" method="post"  name="memberAdd" action="index.php">		
-		<input type="text" id="username" name="username" placeholder="E-mail" />
-		<input type="password" id="password" name="password" placeholder="Password" />
-		<input type="password" id="confirmpassword" name="confirmpassword" placeholder="Re-type Password" />
-		<input type="submit" id="createaccount" name="createaccount" value="Create Account" />
+	<form novalidate class="memberAdd" name="memberAdd">		
+		<input type="text" id="username" name="username" placeholder="E-mail" ng-model="account.username" required />
+		<input type="password" id="password" name="password" placeholder="Password" ng-model="account.password" required/>
+		<input type="password" id="confirmpassword" name="confirmpassword" placeholder="Re-type Password" ng-model="account.password_verify" required data-password-verify="user.password" />
+		<button type="submit" id="createaccount" name="createaccount" ng-click="createAccount(account)">Create Account</button>
 	</form>
 </div>
