@@ -38,7 +38,7 @@
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
 			#Create Account 
 			if(isset($_POST["createaccount"])){
-				if(isset($_POST["username"]) and $_POST["password"] == $_POST["confirmpassword"]{
+				if(isset($_POST["username"]) and $_POST["password"] == $_POST["confirmpassword"]){
 					$status = "Created Account!";
 				}	
 			}
@@ -75,7 +75,7 @@
 	      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	  <![endif]-->
 		<div ng-view></div>
-	<?php } else{?>
+	<?php } else{ ?>
 		<ul class="menu">
 		    <li><a href="#/">Home</a></li>
 		    <li><a href="#/Create">Create Account</a></li>
