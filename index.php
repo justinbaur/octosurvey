@@ -69,10 +69,10 @@
 	?>
 		<a href="partials/logout.php" id="logoutButton">Logout</a>
 		<ul class="menu">
-		    <li><a href="/">Home</a></li>
-		    <li><a href="/Membership">Become A Member</a></li>
-		    <li><a href="/Support">Support</a></li>
-		    <li><a href="/About">About Us</a></li>    
+		    <li><a href="#/">Home</a></li>
+		    <li><a href="#/Membership">Become A Member</a></li>
+		    <li><a href="#/Support">Support</a></li>
+		    <li><a href="#/About">About Us</a></li>    
 		</ul>
 	
 	  <!--[if lt IE 7]>
@@ -83,11 +83,11 @@
 
 	<?php } else{?>
 		<ul class="menu">
-		    <li><a href="/">Home</a></li>
-		    <li><a href="/Create">Create Account</a></li>
-		    <li><a href="/Member">Become A Member</a></li>
-		    <li><a href="/Support">Support</a></li>
-		    <li><a href="/About">About Us</a></li>    
+		    <li><a href="#/">Home</a></li>
+		    <li><a href="#/Create">Create Account</a></li>
+		    <li><a href="#/Member">Become A Member</a></li>
+		    <li><a href="#/Support">Support</a></li>
+		    <li><a href="#/About">About Us</a></li>    
 		</ul>
 		
 		<?php include("partials/authentication.html"); ?> 
