@@ -27,38 +27,44 @@
   <script src="js/directives.js"></script>
 </head>
 <body>
+	<div class="header">
+		<img id="logo" ng-src="" />
+	</div>
+	
 	<?php 
 		$alreadyLogged = false;
 		$correctlyLogged = false;
 		$status = "";
 		if($_POST["username"] == "Justin" and $_POST["password"] == "Baur"){
 			$correctlyLogged = true;
+			$alreadyLogged = true;
 		}
 		
-		if($correctlyLogged == true){
+		if($correctlyLogged == true || $alreadyLogged == true){
 	?>
+		<ul class="menu">
+		    <li><a href="#/">Home</a></li>
+		    <li><a href="#/Create">Create Account</a></li>
+		    <li><a href="#/Member">Become A Member</a></li>
+		    <li><a href="#/Support">Support</a></li>
+		    <li><a href="#/About">About Us</a></li>    
+		</ul>
 	
-	<div class="header">
-		<img id="logo" ng-src="" />
-	</div>
-	
-	<?php include("partials/authentication.html"); ?> 
-	
-	<ul class="menu">
-	    <li><a href="#/">Home</a></li>
-	    <li><a href="#/Create">Create Account</a></li>
-	    <li><a href="#/Member">Become A Member</a></li>
-	    <li><a href="#/Support">Support</a></li>
-	    <li><a href="#/About">About Us</a></li>    
-	</ul>
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
+	  <!--[if lt IE 7]>
+	      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	  <![endif]-->
 
-  <div ng-view></div>
+	 	 <div ng-view></div>
 
 	<?php } else{?>
-	<p>Invalid Login</p>
+		<ul class="menu">
+		    <li><a href="#/">Home</a></li>
+		    <li><a href="#/Member">Become A Member</a></li>
+		    <li><a href="#/Support">Support</a></li>
+		    <li><a href="#/About">About Us</a></li>    
+		</ul>
+		
+		<?php include("partials/authentication.html"); ?> 
 	<?php } ?>
 	
 </body>
