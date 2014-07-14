@@ -10,10 +10,10 @@ angular.module('octosurvey', [
   'octosurvey.controllers'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'MyCtrl1'});
-  $routeProvider.when('/CreateAccount', {templateUrl: 'partials/create.html', controller: 'MyCtrl2'});
-  $routeProvider.when('/Membership', {templateUrl: 'partials/member.html', controller: 'MyCtrl2'});
-  $routeProvider.when('/Support', {templateUrl: 'partials/support.html', controller: 'MyCtrl2'});
-  $routeProvider.when('/About', {templateUrl: 'partials/about.html', controller: 'MyCtrl2'});
+  $routeProvider.when('/', {templateUrl: 'index.php', controller: 'MyCtrl1'});
+  $routeProvider.when('/CreateAccount', {templateUrl: 'view/create.html', controller: 'MyCtrl2'});
+  $routeProvider.when('/Membership', {templateUrl: 'view/member.html', controller: 'MyCtrl2'});
+  $routeProvider.when('/Support', {templateUrl: 'view/support.html', controller: 'MyCtrl2'});
+  $routeProvider.when('/About', {templateUrl: 'view/about.html', controller: 'MyCtrl2'});
   $routeProvider.otherwise({redirectTo: '/'});
 }]);
