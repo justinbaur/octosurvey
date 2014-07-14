@@ -30,9 +30,9 @@
 <body>
 	<p>Successfully Logged Out!</p>
 	<ul class="menu">
-	    <li><a href="#/">Home</a></li>
-	    <li><a href="#/Create">Create Account</a></li>
-	    <li><a href="#/Member">Become A Member</a></li>
+	    <li><a href="index.php">Home</a></li>
+	    <li><a href="#/CreateAccount">Create Account</a></li>
+	    <li><a href="#/Membership">Become A Member</a></li>
 	    <li><a href="#/Support">Support</a></li>
 	    <li><a href="#/About">About Us</a></li>    
 	</ul>
