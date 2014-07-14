@@ -37,6 +37,7 @@
 		
 		if($_SERVER["REQUEST_METHOD"] == "POST")
 		{
+			#Create Account 
 			if(isset($_POST["createaccount"]))
 			{
 				if(isset($_POST["username"]) and $_POST["password"] == $_POST["confirmpassword"])
@@ -44,18 +45,18 @@
 					$status = "Created Account!";
 				}	
 			}
+			
+			#Login
+			if($_SESSION["valid"] == true)
+			{
+				$alreadyLogged = true;
+			}else if($_POST["username"] == "Justin" and $_POST["password"] == "Baur"){
+				$correctlyLogged = true;
+				$alreadyLogged = true;
+				$_SESSION["valid"] == true;
+				$status = "Welcome, " . $_POST["username"];
+			}
 		}
-		
-		if($_SESSION["valid"] == true)
-		{
-			$alreadyLogged = true;
-		}else if($_POST["username"] == "Justin" and $_POST["password"] == "Baur"){
-			$correctlyLogged = true;
-			$alreadyLogged = true;
-			$_SESSION["valid"] == true;
-			$status = "Welcome, " . $_POST["username"];
-		}
-		
 
 	?>
 	
@@ -79,8 +80,6 @@
 	      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	  <![endif]-->
 
-	 	 <div ng-view></div>
-
 	<?php } else{?>
 		<ul class="menu">
 		    <li><a href="#/">Home</a></li>
@@ -93,5 +92,6 @@
 		<?php include("partials/authentication.html"); ?> 
 	<?php } ?>
 	
+	<div ng-view></div>
 </body>
 </html>
