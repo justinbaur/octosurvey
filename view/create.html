@@ -1,12 +1,13 @@
 <div id="createDisplay">
 	<p>Create an Account!</p>
-	<form novalidate class="memberAdd" name="memberAdd">		
+	<form class="memberAdd" name="memberAdd">		
 		<input type="text" id="username" name="username" placeholder="E-mail" ng-model="account.username" required />
-		<input type="password" id="password" name="password" placeholder="Password" ng-model="account.password" required/>
-		<div ng-show="form.password.$error.required">Field Required</div>
-		<input type="password" id="confirmpassword" name="confirmpassword" placeholder="Re-type Password" ng-model="account.password_verify" required data-password-verify="user.password" />
-		<div ng-show="form.password.$error.required">Field Required</div>
-		<div ng-show="form.password.$error.passwordVerify">Fields are not equal</div>
+		<div ng-show="memberAdd.username.$error.required">E-Mail required!</div>
+		<input type="password" id="password" name="password" placeholder="Password" ng-model="account.password" required equals="{{account.confirm_password}}" />
+		<div ng-show="memberAdd.password.$error.required">Password required!</div>
+		<input type="password" id="confirmpassword" name="confirmpassword" placeholder="Re-type Password" ng-model="account.confirm_password" required equals="{{account.password}}" />
+		<div ng-show="memberAdd.confirmpassword.$error.required">Confirmation Password required!</div>
+		<div ng-show="memberAdd.confirmpassword.$error.equals">Passwords are not equal!</div>
 		<button type="submit" id="createaccount" name="createaccount" ng-click="createAccount(account)">Create Account</button>
 	</form>
 </div>
