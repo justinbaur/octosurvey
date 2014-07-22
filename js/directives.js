@@ -9,7 +9,7 @@ angular.module('octosurvey.directives', []).
       elm.text(version);
     };
   }])
-.directive('passwordValidation', function() {
+.directive('passwordFormValidation', function() {
   return {
     restrict: 'A', // only activate on element attribute
     require: '?ngModel', // get a hold of NgModelController
@@ -22,34 +22,35 @@ angular.module('octosurvey.directives', []).
       });
 
       // observe the other value and re-validate on change
-      attrs.$observe('equals', function (val) {
+      attrs.$observe('passwordFormValidation', function (val) {
         scope.passwordValidation = validate();
       });
 
       var validate = function() {
         // values
         var val1 = ngModel.$viewValue;
-        var val2 = attrs.equals;
-	var valid = true;
+        var val2 = attrs.passwordFormValidation;
+	var validPassword = true;
 	
 	if(val1 !== val2){
-	  valid = false;
-	  res += "<p>Passwords do not match!</p>";
+	  validPassword = false;
+	  res += " Passwords do not match! ";
 	}
 	
 	if(val1.length < 6){
-	  valid = false;
-	  res += "<p>Password needs to be longer then 6 characters</P>";
+	  validPassword = false;
+	  res += " Password needs to be longer then 6 characters! ";
 	}
 	
 	if(val1.length >= 16){
-	  valid = false;
-	  res += "<p>Password needs to be shorter then 16 characters</P>";
+	  validPassword = false;
+	  res += " Password needs to be shorter then 16 characters! ";
 	}	
 	
         // set validity
-        ngModel.$setValidity('passwordValidation', valid);
+        ngModel.$setValidity('passwordValidationFlag', validPassword);
+        return res;
       };
     }
-  }
+  };
 });
