@@ -7,13 +7,14 @@
 			<span ng-show="memberAdd.username.$error.email">This is not a valid E-mail!</span>
 		</div>
 		
-		<input type="password" id="password" name="password" placeholder="Password" ng-model="account.password" required formValidation="{{account.confirm_password}}" />
+		<input type="password" id="password" name="password" placeholder="Password" ng-model="account.password" required passwordValidation="{{account.confirm_password}}" />
 		<div ng-show="memberAdd.password.$error.required">Password required!</div>
+		<div ng-show="memberAdd.password.$error.passwordValidation">{{passwordValidation}}</div>
 				
-		<input type="password" id="confirmpassword" name="confirmpassword" placeholder="Re-type Password" ng-model="account.confirm_password" required formValidation="{{account.password}}" />
+		<input type="password" id="confirmpassword" name="confirmpassword" placeholder="Re-type Password" ng-model="account.confirm_password" required passwordValidation="{{account.password}}" />
 		<div ng-show="memberAdd.confirmpassword.$error.required">Confirmation Password required!</div>
 		
-		<div ng-show="memberAdd.password.$error.formValidation">{{passwordValidation}}</div>
+		<div ng-show="memberAdd.confirmpassword.$error.passwordValidation">{{passwordValidation}}</div>
 		
 		
 		
