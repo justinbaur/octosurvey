@@ -36,4 +36,25 @@ angular.module('octosurvey.directives', []).
       };
     }
   }
+}).directive('len', function() {
+  return {
+    restrict: 'A', // only activate on element attribute
+    require: '?ngModel', // get a hold of NgModelController
+    link: function(scope, elem, attrs, ngModel) {
+      if(!ngModel) return; // do nothing if no ng-model
+
+      // watch own value and re-validate on change
+      scope.$watch(attrs.ngModel, function() {
+        len();
+      });
+
+      var len = function() {
+        // values
+        var val1 = ngModel.$viewValue;
+
+        // set validity
+        ngModel.$setValidity('len', val1.length > 6);
+      };
+    }
+  }
 });
