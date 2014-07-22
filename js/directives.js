@@ -9,7 +9,7 @@ angular.module('octosurvey.directives', []).
       elm.text(version);
     };
   }])
-.directive('equals', function() {
+.directive('validation', function() {
   return {
     restrict: 'A', // only activate on element attribute
     require: '?ngModel', // get a hold of NgModelController
@@ -18,12 +18,30 @@ angular.module('octosurvey.directives', []).
 
       // watch own value and re-validate on change
       scope.$watch(attrs.ngModel, function() {
-        validate();
+      	var res = "";
+        res = res + validate();
+        res = res + maxLength();
+        res = res + minLength();
+        
+        if(res.length > 0){
+           ngModel.$setValidity('validation', false);
+        }else{
+    	   ngModel.$setValidity('validation', true);
+        }
       });
 
       // observe the other value and re-validate on change
-      attrs.$observe('equals', function (val) {
-        validate();
+      attrs.$observe('validation', function (val) {
+        var res = "";
+        res = res + validate();
+        res = res + maxLength();
+        res = res + minLength();
+        
+        if(res.length > 0){
+           ngModel.$setValidity('validation', false);
+        }else{
+    	   ngModel.$setValidity('validation', true);
+        }
       });
 
       var validate = function() {
@@ -31,51 +49,40 @@ angular.module('octosurvey.directives', []).
         var val1 = ngModel.$viewValue;
         var val2 = attrs.equals;
 
+	var resMessage = "";
+	
         // set validity
-        ngModel.$setValidity('equals', val1 === val2);
+        if(val1 !== val2){
+          resMessage = "<p>Passwords do not match</p>";
+        }
+        
+	return resMessage;
+      };
+      
+      var maxLength = function() {
+      	var val1 = ngModel.$viewValue;
+      	var valid = true;
+      	var resMessage = "";
+      	
+      	if(val1.length <= 6){
+      	   valid = false;
+           resMssage = "<p>Password requires length of 6</p>";
+      	}
+      	
+   	return resMessage;
+      };
+      
+      var minLength = function() {
+      	var val1 = ngModel.$viewValue;
+      	var valid = true;
+      	var resMessage = "";
+      	
+      	if(val1.length >= 16){
+      	   valid = false;
+           resMessage = "<p>Password max length of 16</p>";
+      	}
+      	
+   	return resMessage;
       };
     }
   }
-}).directive('minLength', function() {
-  return {
-    restrict: 'A', // only activate on element attribute
-    require: '?ngModel', // get a hold of NgModelController
-    link: function(scope, elem, attrs, ngModel) {
-      if(!ngModel) return; // do nothing if no ng-model
-
-      // watch own value and re-validate on change
-      scope.$watch(attrs.ngModel, function() {
-        minLen();
-      });
-
-      var minLen = function() {
-        // values
-        var val1 = ngModel.$viewValue;
-
-        // set validity
-        ngModel.$setValidity('minLength', val1.length >= 6);
-      };
-    }
-  }
-}).directive('maxLength', function() {
-  return {
-    restrict: 'A', // only activate on element attribute
-    require: '?ngModel', // get a hold of NgModelController
-    link: function(scope, elem, attrs, ngModel) {
-      if(!ngModel) return; // do nothing if no ng-model
-
-      // watch own value and re-validate on change
-      scope.$watch(attrs.ngModel, function() {
-        maxLen();
-      });
-
-      var maxLen = function() {
-        // values
-        var val1 = ngModel.$viewValue;
-
-        // set validity
-        ngModel.$setValidity('maxLength', val1.length <= 16);
-      };
-    }
-  }
-});
