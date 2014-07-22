@@ -9,7 +9,7 @@ angular.module('octosurvey.directives', []).
       elm.text(version);
     };
   }])
-.directive('validation', function() {
+.directive('formValidation', function() {
   return {
     restrict: 'A', // only activate on element attribute
     require: '?ngModel', // get a hold of NgModelController
@@ -28,6 +28,7 @@ angular.module('octosurvey.directives', []).
         }else{
     	   ngModel.$setValidity('validation', true);
         }
+        $scope.passwordValidation = res;
       });
 
       // observe the other value and re-validate on change
@@ -42,6 +43,7 @@ angular.module('octosurvey.directives', []).
         }else{
     	   ngModel.$setValidity('validation', true);
         }
+        $scope.passwordValidation = res;
       });
 
       var validate = function() {
@@ -52,7 +54,7 @@ angular.module('octosurvey.directives', []).
 	var resMessage = "";
 	
         // set validity
-        if(val1 !== val2){
+        if(val1 != val2){
           resMessage = "<p>Passwords do not match</p>";
         }
         
@@ -61,11 +63,9 @@ angular.module('octosurvey.directives', []).
       
       var maxLength = function() {
       	var val1 = ngModel.$viewValue;
-      	var valid = true;
       	var resMessage = "";
       	
       	if(val1.length <= 6){
-      	   valid = false;
            resMssage = "<p>Password requires length of 6</p>";
       	}
       	
@@ -74,11 +74,9 @@ angular.module('octosurvey.directives', []).
       
       var minLength = function() {
       	var val1 = ngModel.$viewValue;
-      	var valid = true;
       	var resMessage = "";
       	
       	if(val1.length >= 16){
-      	   valid = false;
            resMessage = "<p>Password max length of 16</p>";
       	}
       	
