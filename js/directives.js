@@ -37,12 +37,12 @@ angular.module('octosurvey.directives', []).
 	  res += " Passwords do not match! ";
 	}
 	
-	if(val1.length < 6){
+	if(val2.length < 6){
 	  validPassword = false;
 	  res += " Password needs to be longer then 6 characters! ";
 	}
 	
-	if(val1.length >= 16){
+	if(val2.length >= 16){
 	  validPassword = false;
 	  res += " Password needs to be shorter then 16 characters! ";
 	}	
@@ -52,5 +52,5 @@ angular.module('octosurvey.directives', []).
         return res;
       };
     }
-  };
+  }
 });
