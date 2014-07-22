@@ -3,13 +3,7 @@
 /* Directives */
 
 
-angular.module('octosurvey.directives', []).
-  directive('appVersion', ['version', function(version) {
-    return function(scope, elm, attrs) {
-      elm.text(version);
-    };
-  }])
-.directive('passwordFormValidation', function() {
+angular.module('octosurvey.directives', []).directive('passwordFormValidation', function() {
   return {
     restrict: 'A', // only activate on element attribute
     require: '?ngModel', // get a hold of NgModelController
@@ -31,6 +25,7 @@ angular.module('octosurvey.directives', []).
         var val1 = ngModel.$viewValue;
         var val2 = attrs.passwordFormValidation;
 	var validPassword = true;
+	var res = "";
 	
 	if(val1 !== val2){
 	  validPassword = false;
@@ -52,5 +47,5 @@ angular.module('octosurvey.directives', []).
         return res;
       };
     }
-  }
+  };
 });
