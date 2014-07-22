@@ -7,7 +7,7 @@
 			<span ng-show="memberAdd.username.$error.email">This is not a valid E-mail!</span>
 		</div>
 		
-		<input type="password" id="password" name="password" placeholder="Password" ng-model="account.password" required equals="{{account.confirm_password}}" />
+		<input type="password" id="password" name="password" placeholder="Password" ng-model="account.password" required maxLength="{{account.confirm_password}}" minLength="{{account.confirm_password}}" equals="{{account.confirm_password}}" />
 		<div ng-show="memberAdd.password.$error.required">Password required!</div>
 		<div ng-show="memberAdd.password.$error.minLength">Minimum Length of 6 Required</div>
 		<div ng-show="memberAdd.password.$error.maxLength">Maximum Length of 16 Required</div>
