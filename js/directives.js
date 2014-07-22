@@ -3,7 +3,7 @@
 /* Directives */
 
 
-angular.module('octosurvey.directives', []).directive('passwordFormValidation', function() {
+angular.module('octosurvey.directives', []).directive('passwordformvalidation', function() {
   return {
     restrict: 'A', // only activate on element attribute
     require: '?ngModel', // get a hold of NgModelController
@@ -12,18 +12,18 @@ angular.module('octosurvey.directives', []).directive('passwordFormValidation', 
 
       // watch own value and re-validate on change
       scope.$watch(attrs.ngModel, function() {
-        scope.passwordValidation = validate();
+        scope.passwordvalidation = validate();
       });
 
       // observe the other value and re-validate on change
-      attrs.$observe('passwordFormValidation', function (val) {
-        scope.passwordValidation = validate();
+      attrs.$observe('passwordformvalidation', function (val) {
+        scope.passwordvalidation = validate();
       });
 
       var validate = function() {
         // values
         var val1 = ngModel.$viewValue;
-        var val2 = attrs.passwordFormValidation;
+        var val2 = attrs.passwordformvalidation;
 	var validPassword = true;
 	var res = "";
 	
@@ -43,7 +43,7 @@ angular.module('octosurvey.directives', []).directive('passwordFormValidation', 
 	}	
 	
         // set validity
-        ngModel.$setValidity('passwordValidationFlag', validPassword);
+        ngModel.$setValidity('passwordvalidationflag', validPassword);
         return res;
       };
     }
