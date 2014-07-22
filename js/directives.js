@@ -36,7 +36,7 @@ angular.module('octosurvey.directives', []).
       };
     }
   }
-}).directive('len', function() {
+}).directive('minLength', function() {
   return {
     restrict: 'A', // only activate on element attribute
     require: '?ngModel', // get a hold of NgModelController
@@ -45,15 +45,36 @@ angular.module('octosurvey.directives', []).
 
       // watch own value and re-validate on change
       scope.$watch(attrs.ngModel, function() {
-        len();
+        minLen();
       });
 
-      var len = function() {
+      var minLen = function() {
         // values
         var val1 = ngModel.$viewValue;
 
         // set validity
-        ngModel.$setValidity('len', val1.length > 6);
+        ngModel.$setValidity('minLength', val1.length >= 6);
+      };
+    }
+  }
+}).directive('maxLength', function() {
+  return {
+    restrict: 'A', // only activate on element attribute
+    require: '?ngModel', // get a hold of NgModelController
+    link: function(scope, elem, attrs, ngModel) {
+      if(!ngModel) return; // do nothing if no ng-model
+
+      // watch own value and re-validate on change
+      scope.$watch(attrs.ngModel, function() {
+        maxLen();
+      });
+
+      var maxLen = function() {
+        // values
+        var val1 = ngModel.$viewValue;
+
+        // set validity
+        ngModel.$setValidity('maxLength', val1.length <= 16);
       };
     }
   }

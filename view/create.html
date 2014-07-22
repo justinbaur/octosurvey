@@ -9,8 +9,9 @@
 		
 		<input type="password" id="password" name="password" placeholder="Password" ng-model="account.password" required equals="{{account.confirm_password}}" />
 		<div ng-show="memberAdd.password.$error.required">Password required!</div>
-		<div ng-show="memberAdd.password.$error.len">
-		
+		<div ng-show="memberAdd.password.$error.minLength">Minimum Length of 6 Required</div>
+		<div ng-show="memberAdd.password.$error.maxLength">Maximum Length of 16 Required</div>
+				
 		<input type="password" id="confirmpassword" name="confirmpassword" placeholder="Re-type Password" ng-model="account.confirm_password" required equals="{{account.password}}" />
 		<div ng-show="memberAdd.confirmpassword.$error.required">Confirmation Password required!</div>
 		<div ng-show="memberAdd.confirmpassword.$error.equals">Passwords are not equal!</div>
