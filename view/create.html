@@ -1,6 +1,6 @@
 <div id="createDisplay">
 	<p>Create an Account!</p>
-	<form novalidate class="memberAdd" name="memberAdd">		
+	<form class="memberAdd" name="memberAdd">		
 		<input type="email" id="username" name="username" placeholder="E-mail" ng-model="account.username" required />
 		<div ng-show="memberAdd.username.$dirty && memberAdd.username.$invalid">
 			<span ng-show="memberAdd.username.$error.required">E-mail required!</span>	
