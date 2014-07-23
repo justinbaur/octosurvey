@@ -1,6 +1,6 @@
 <div id="createDisplay">
 	<p>Create an Account!</p>
-	<form class="memberAdd" name="memberAdd">		
+	<form novalidate ng-submit="memberAdd.$valid && CreateAccountController.createAccount(account)" class="memberAdd" name="memberAdd">		
 		<input type="email" id="username" name="username" placeholder="E-mail" ng-model="account.username" required />
 		<div ng-show="memberAdd.username.$dirty && memberAdd.username.$invalid">
 			<span ng-show="memberAdd.username.$error.required">E-mail required!</span>	
@@ -16,7 +16,7 @@
 		
 		
 		
-		<button type="submit" id="createaccount" name="createaccount" ng-click="createAccount(account)">Create Account</button>
+		<button type="submit" id="createaccount" name="createaccount">Create Account</button>
 	</form>
 	
 	<pre>pre processing data: {{preproc}}</pre>
