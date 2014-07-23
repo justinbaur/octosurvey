@@ -10,8 +10,14 @@ angular.module('octosurvey.controllers', [])
 	$scope.createAccount = function(account) {
 		/* Call to PHP Service to insert into account */
 		$scope.preproc = account;
+		
+		var test = {
+			username:"Justin",
+			password:"boss"
+		};
+		
 		var request = new FormData();
-		request.append('data', angular.toJson(account));
+		request.append('data', angular.toJson(test));
 		 
 		$http.post('backend/createAccountService.php', request).
 			success(function(data, status){
