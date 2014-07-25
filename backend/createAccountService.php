@@ -2,7 +2,7 @@
 	if($_SERVER["REQUEST_METHOD"] == "POST")
 	{
 		
-		$account = json_decode(http_get_request_body(), true);
+		$account = json_decode(file_get_contents('php://input'), true);
 		$username = $account['username'];
 		$password = $account['password'];
 		
