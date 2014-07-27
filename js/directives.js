@@ -10,7 +10,7 @@ angular.module('octosurvey.directives', []).directive('uniqueid', function($http
 			scope.$watch(attrs.ngModel, function(){
 				$http({
 					method: 'POST',
-					url:	'backend/uniqueId',
+					url:	'backend/uniqueId.php',
 					data: {'field': attrs.uniqueid}
 				}).success(function(data, status, headers, cfg){
 					c.$setValidity('unique', data.isUnique);
