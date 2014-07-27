@@ -6,8 +6,6 @@
 		$password = pg_escape_string($account['password']);
 		
 		$dbUrl = parse_url($_ENV['DATABASE_URL']);
-		
-		#$connectionString = "host=ec2-54-197-237-120.compute-1.amazonaws.com port=5432 dbname=da113aib43h35h user=fbktfkddiceiux password=i3Xxbg_bH2bUOPy1EPJ1rT4PtH sslmode=require";
 
 		$dbHost = $dbUrl['host'];
 		$dbPort = $dbUrl['port'];
@@ -15,9 +13,9 @@
 		$dbUser	= $dbUrl['user'];
 		$dbPass = $dbUrl['pass'];
 		
-		$connection = "host='.$dbHost.' port='.$dbPort.' dbname='.$dbName.' user='.$dbUser.' password='.$dbPass.' sslmode=require";
+		$connection = "host=.$dbHost. port=.$dbPort. dbname=.$dbName. user=.$dbUser. password=.$dbPass. sslmode=require";
 		
-		#$db = pg_connect($connection) or die('Could not connect: ' . pg_last_error());
+		$db = pg_connect($connection) or die('Could not connect: ' . pg_last_error());
 			
 		
 		
@@ -43,7 +41,7 @@
 		mail($to, $subject, $message, $headers);
 		*/
 		
-		$arr = array ('hello'=>$dbName, 'con'=>$connection);
+		$arr = array ('con'=>$connection);
 		echo json_encode($arr);
 	}
 ?>
