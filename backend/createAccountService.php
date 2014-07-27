@@ -13,7 +13,7 @@
 		$dbUser	= $dbUrl['user'];
 		$dbPass = $dbUrl['pass'];
 		
-		$connection = "host=.$dbHost. port=.$dbPort. dbname=.$dbName. user=.$dbUser. password=.$dbPass. sslmode=require";
+		$connection = "host=".$dbHost." port=".$dbPort." dbname=".$dbName." user=".$dbUser." password=".$dbPass." sslmode=require";
 		
 		$db = pg_connect($connection) or die('Could not connect: ' . pg_last_error());
 			
