@@ -5,14 +5,18 @@
 		$username = pg_escape_string($account['username']);
 		$password = pg_escape_string($account['password']);
 		
-		$dblogin = "fbktfkddiceiux";
-		$dbpass = "i3Xxbg_bH2bUOPy1EPJ1rT4PtH";
-		$dbname = "da113aib43h35h";
-		$dbhost = "ec2-54-197-237-120.compute-1.amazonaws.com";
-		$dbport = "5432";
-
-		$connection = pg_connect("host='.$dbhost.' port='.$dbport.' dbname='.$dbname.' user='.$dblogin.' password='.$dbpass.' sslmode=require") or die('Could not connect: ' . pg_last_error());
+		#$dblogin = "fbktfkddiceiux";
+		#$dbpass = "i3Xxbg_bH2bUOPy1EPJ1rT4PtH";
+		#$dbname = "da113aib43h35h";
+		#$dbhost = "ec2-54-197-237-120.compute-1.amazonaws.com";
+		#$dbport = "5432";
+		$connectionString = "host=ec2-54-197-237-120.compute-1.amazonaws.com port=5432 dbname=da113aib43h35h user=fbktfkddiceiux password=i3Xxbg_bH2bUOPy1EPJ1rT4PtH sslmode=require";
+		#$connection = pg_connect("host='.$dbhost.' port='.$dbport.' dbname='.$dbname.' user='.$dblogin.' password='.$dbpass.' sslmode=require") or die('Could not connect: ' . pg_last_error());
+		$db = pg_connect($connectionString);
 		
+		if(!$db){
+			echo "db connection error" . $_ENV['DATABASE_URL'] . pg_last_error();
+		}
 		
 		
 		
