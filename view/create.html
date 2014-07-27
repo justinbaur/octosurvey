@@ -1,22 +1,26 @@
 <div id="createDisplay">
 	<p>Create an Account!</p>
-	<form class="memberAdd" name="memberAdd">		
-		<input type="email" id="username" name="username" placeholder="E-mail" ng-model="account.username" required />
-		<div ng-show="memberAdd.username.$dirty && memberAdd.username.$invalid">
-			<span ng-show="memberAdd.username.$error.required">E-mail required!</span>	
-			<span ng-show="memberAdd.username.$error.email">This is not a valid E-mail!</span>
+	<form class="accountCreate" name="accountCreate">		
+		<input type="text" id="username" name="username" placeholder="Name" ng-model="account.username" required uniqueid="{{account.username}}" />
+		<div ng-show="accountCreate.username.$dirty && accountCreate.username.$invalid">
+			<span ng-show="accountCreate.username.$error.required">Name required!</span>
+		</div>
+		<div ng-show="accountCreate.username.$error.unique">Name not unique!</div>	
+		
+		<input type="email" id="email" name="email" placeholder="E-mail" ng-model="account.email" required />
+		<div ng-show="accountCreate.email.$dirty && accountCreate.email.$invalid">
+			<span ng-show="accountCreate.email.$error.required">E-mail required!</span>	
+			<span ng-show="accountCreate.email.$error.email">This is not a valid E-mail!</span>
 		</div>
 		
 		<input type="password" id="password" name="password" placeholder="Password" ng-model="account.password" required passwordformvalidation="{{account.confirm_password}}" />
-		<div ng-show="memberAdd.password.$error.required">Password required!</div>
+		<div ng-show="accountCreate.password.$error.required">Password required!</div>
 				
 		<input type="password" id="confirmpassword" name="confirmpassword" placeholder="Re-type Password" ng-model="account.confirm_password" required passwordformvalidation="{{account.password}}" />
-		<div ng-show="memberAdd.confirmpassword.$error.required">Confirmation Password required!</div>		
-		<div ng-show="memberAdd.password.$error.passwordvalidationflag">{{passwordvalidation}}</div>
+		<div ng-show="accountCreate.confirmpassword.$error.required">Confirmation Password required!</div>		
+		<div ng-show="accountCreate.password.$error.passwordvalidationflag">{{passwordvalidation}}</div>
 		
-		
-		
-		<button ng-click="memberAdd.$valid && createAccount(account)" type="submit" id="createaccount" name="createaccount">Create Account</button>
+		<button ng-click="accountCreate.$valid && createAccount(account)" type="submit" id="createaccount" name="createaccount">Create Account</button>
 	</form>
 	
 	<pre>pre processing data: {{preproc}}</pre>

@@ -3,7 +3,24 @@
 /* Directives */
 
 
-angular.module('octosurvey.directives', []).directive('passwordformvalidation', function() {
+angular.module('octosurvey.directives', []).directive('uniqueid', function($http){
+	return {
+		require: 'ngModel',
+		link: function(scope, ele, attrs, c){
+			scope.$watch(attrs.ngModel, function(){
+				$http({
+					method: 'POST',
+					url:	'backend/uniqueId',
+					data: {'field': attrs.uniqueid}
+				}).success(function(data, status, headers, cfg){
+					c.$setValidity('unique', data.isUnique);
+				}).error(function(data, status, headers, cfg){
+					c.$setValidity('unique', false);
+				});
+			});
+		}
+	}
+}).directive('passwordformvalidation', function() {
   return {
     restrict: 'A', // only activate on element attribute
     require: '?ngModel', // get a hold of NgModelController
