@@ -15,7 +15,9 @@
 		$dbUser	= $dbUrl['user'];
 		$dbPass = $dbUrl['pass'];
 		
-		$db = pg_connect("host='.$dbHost.' port='.$dbPort.' dbname='.$dbName.' user='.$dbUser.' password='.$dbPass.' sslmode=require") or die('Could not connect: ' . pg_last_error());
+		$connection = "host='.$dbHost.' port='.$dbPort.' dbname='.$dbName.' user='.$dbUser.' password='.$dbPass.' sslmode=require";
+		
+		$db = pg_connect($connection) or die('Could not connect: ' . pg_last_error());
 			
 		
 		
@@ -41,7 +43,7 @@
 		mail($to, $subject, $message, $headers);
 		*/
 		
-		$arr = array ('hello'=>"justin");
+		$arr = array ('hello'=>$dbName);
 		echo json_encode($arr);
 	}
 ?>
