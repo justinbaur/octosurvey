@@ -1,6 +1,6 @@
 <div id="createDisplay">
 	<p>Create an Account!</p>
-	<form class="accountCreate" name="accountCreate">		
+	<form novalidate class="accountCreate" name="accountCreate">		
 		<input type="text" id="username" name="username" placeholder="Name" ng-model="account.username" required uniqueid="{{account.username}}" />
 		<div ng-show="accountCreate.username.$dirty && accountCreate.username.$invalid">
 			<span ng-show="accountCreate.username.$error.required">Name required!</span>
