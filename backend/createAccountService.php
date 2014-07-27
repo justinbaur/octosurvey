@@ -8,9 +8,10 @@
 		$dblogin = "fbktfkddiceiux";
 		$dbpass = "i3Xxbg_bH2bUOPy1EPJ1rT4PtH";
 		$dbname = "da113aib43h35h";
-		$dbhost = "ec2-54-197-237-120.compute-1.amazonaws.com:5432";
+		$dbhost = "ec2-54-197-237-120.compute-1.amazonaws.com";
+		$dbport = "5432";
 
-		$connection = pg_connect("host='.$dbhost.' dbname='.$dbname.' user='.$dblogin.' password='.$dbpass.'") or die('Could not connect: '.pg_last_error());
+		$connection = pg_connect("host='.$dbhost.' port='.$dbport.' dbname='.$dbname.' user='.$dblogin.' password='.$dbpass.' requiressl=true") or die('Could not connect: ' . pg_last_error());
 		
 		
 		
