@@ -22,16 +22,15 @@
 		
 		$line = pg_fetch_array($result, null, PGSQL_ASSOC);
 		
-		pg_free_result($result);
-		pg_close($db);
-		
 		if($line){
-			$arr = array ('isUnique'=>false);
+			$arr = array ('user'=>$username,'query'=>$select,'result'=>$line,'isUnique'=>false);
 			echo json_encode($arr);
 		}else{
-			$arr = array ('isUnique'=>true);
+			$arr = array ('user'=>$username,'query'=>$select,'result'=>$line,'isUnique'=>true);
 			echo json_encode($arr);
 		}
 
+		pg_free_result($result);
+		pg_close($db);
 	}
 ?>
