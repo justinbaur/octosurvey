@@ -1,11 +1,5 @@
 <?php
-	if($_SERVER["REQUEST_METHOD"] == "POST")
-	{	
-		$account = json_decode(file_get_contents('php://input'), true);
-		$username = pg_escape_string($account['username']);
-		$password = pg_escape_string($account['password']);
-		$email = pg_escape_string($account['email']);
-		
+	function databaseConnect(){
 		$dbUrl = parse_url($_ENV['DATABASE_URL']);
 
 		$dbHost = $dbUrl['host'];
@@ -18,6 +12,18 @@
 		
 		$db = pg_connect($connection) or die('Could not connect: ' . pg_last_error());
 		
+		return $db;
+	}
+
+	if($_SERVER["REQUEST_METHOD"] == "POST")
+	{	
+		$account = json_decode(file_get_contents('php://input'), true);
+		$username = pg_escape_string($account['username']);
+		$password = pg_escape_string($account['password']);
+		$email = pg_escape_string($account['email']);
+		
+		$conn = databaseConnect();
+		
 		$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$password."');";
 		
 		pg_query($insert) or die('Insert Failed' . pg_last_error());
@@ -29,31 +35,8 @@
 		$line = pg_fetch_array($result, null, PGSQL_ASSOC);
 		
 		pg_free_result($result);
-		pg_close($db);
+		pg_close($conn);
 		
-		/* E-mail Config 
-		$to = $username;
-		$subject = 'OctoSurvey Signup | Verification';
-		$message = '
-		
-		Thanks for signing up for OctoSurvey!
-		Your account has been created, you can login with the following credentials after you have activated your account via the URL.
-		
-		-----------------------
-		Username: '.$username.'
-		Password: '.$password.'
-		
-		
-		Please click the following link to activate your account:
-		https://octosurvey.herokuapp.com/verify.php?email='.$username.'&hash='.$hash.'
-		
-		';
-		
-		$headers = 'From:noreply@octosurvey.herokuapp.com' . "\r\n";
-		mail($to, $subject, $message, $headers);
-		*/
-		
-		#$arr = array ('con'=>$connection);
 		echo json_encode($line);
 	}
 ?>

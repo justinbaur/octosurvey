@@ -1,9 +1,5 @@
 <?php
-	if($_SERVER["REQUEST_METHOD"] == "POST")
-	{		
-		$input = json_decode(file_get_contents('php://input'), true);
-		$username = $input['field'];
-		
+	function databaseConnect(){
 		$dbUrl = parse_url($_ENV['DATABASE_URL']);
 
 		$dbHost = $dbUrl['host'];
@@ -15,7 +11,17 @@
 		$connection = "host=".$dbHost." port=".$dbPort." dbname=".$dbName." user=".$dbUser." password=".$dbPass." sslmode=require";
 		
 		$db = pg_connect($connection) or die('Could not connect: ' . pg_last_error());
-				
+		
+		return $db;
+	}
+	
+	if($_SERVER["REQUEST_METHOD"] == "POST")
+	{		
+		$input = json_decode(file_get_contents('php://input'), true);
+		$username = $input['field'];
+
+		$conn = databaseConnect();	
+					
 		$select = "SELECT username FROM accounts WHERE username='".$username."';";
 		
 		$result = pg_query($select) or die("select failed" . pg_last_error());
@@ -31,6 +37,6 @@
 		}
 
 		pg_free_result($result);
-		pg_close($db);
+		pg_close($conn);
 	}
 ?>
