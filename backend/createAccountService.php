@@ -17,14 +17,6 @@
 		$connection = "host=".$dbHost." port=".$dbPort." dbname=".$dbName." user=".$dbUser." password=".$dbPass." sslmode=require";
 		
 		$db = pg_connect($connection) or die('Could not connect: ' . pg_last_error());
-			
-		$createTable = 
-			'CREATE TABLE accounts (
-			email varchar(40) CONSTRAINT firstkey PRIMARY KEY,
-			username varchar(20) NOT NULL,
-			password varchar(20) NOT NULL
-			);';
-		pg_query($createTable) or die('create Failed' .pg_last_error());
 		
 		$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$password."');";
 		
