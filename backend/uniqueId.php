@@ -1,7 +1,8 @@
 <?php
 	if($_SERVER["REQUEST_METHOD"] == "POST")
 	{		
-		$username = json_decode(file_get_contents('php://input'), true);
+		$input = json_decode(file_get_contents('php://input'), true);
+		$username = $input['field'];
 		
 		$dbUrl = parse_url($_ENV['DATABASE_URL']);
 
