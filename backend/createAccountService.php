@@ -4,6 +4,7 @@
 		$account = json_decode(file_get_contents('php://input'), true);
 		$username = pg_escape_string($account['username']);
 		$password = pg_escape_string($account['password']);
+		$email = pg_escape_string($account['email']);
 		
 		$dbUrl = parse_url($_ENV['DATABASE_URL']);
 
@@ -17,7 +18,26 @@
 		
 		$db = pg_connect($connection) or die('Could not connect: ' . pg_last_error());
 			
+		$createTable = 
+			'CREATE TABLE accounts (
+			email varchar(40) CONSTRAINT firstkey PRIMARY KEY,
+			username varchar(20) NOT NULL,
+			password varchar(20) NOT NULL
+			);';
+		pg_query($createTable) or die('create Failed' .pg_last_error());
 		
+		$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$password."');";
+		
+		pg_query($insert) or die('Insert Failed' . pg_last_error());
+		
+		$select = 'SELECT * FROM accounts;';
+		
+		$result = pg_query($select) or die("select failed" . pg_last_error());
+		
+		$line = pg_fetch_array($result, null, PGSQL_ASSOC);
+		
+		pg_free_result($result);
+		pg_close($db);
 		
 		/* E-mail Config 
 		$to = $username;
@@ -41,7 +61,7 @@
 		mail($to, $subject, $message, $headers);
 		*/
 		
-		$arr = array ('con'=>$connection);
-		echo json_encode($arr);
+		#$arr = array ('con'=>$connection);
+		echo json_encode($line);
 	}
 ?>
