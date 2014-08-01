@@ -6,16 +6,16 @@
 angular.module('octosurvey.directives', []).directive('uniqueid', function($http){
 	return {
 		require: 'ngModel',
-		link: function(scope, ele, attrs, c){
+		link: function(scope, ele, attrs, value){
 			scope.$watch(attrs.ngModel, function(){
 				$http({
 					method: 'POST',
 					url:	'backend/uniqueId.php',
 					data: {'field': attrs.uniqueid}
 				}).success(function(data, status, headers, cfg){
-					c.$setValidity('unique', data.isUnique);
+					value.$setValidity('unique', data.isUnique);
 				}).error(function(data, status, headers, cfg){
-					c.$setValidity('unique', false);
+					value.$setValidity('unique', false);
 				});
 			});
 		}

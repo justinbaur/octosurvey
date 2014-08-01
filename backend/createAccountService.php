@@ -1,4 +1,6 @@
 <?php
+	#require 'vendor/autoload.php';
+
 	function databaseConnect(){
 		$dbUrl = parse_url($_ENV['DATABASE_URL']);
 
@@ -15,6 +17,20 @@
 		return $db;
 	}
 
+/*
+	function sendVerificationEmail($to, $from, $fromName, $subject, $body){		
+		$sendgrid = new SendGrid('octosurvey', 'octosurveytest', array("turn_off_ssl_verification" => true));
+	
+		$email = new SendGrid\Email();
+		$email->addTo($to)->
+		       setFrom($from)->
+		       setFromName($fromName)->
+		       setSubject($subject)->
+		       setText($body);
+		$sendgrid->send($email);
+	}
+*/
+	
 	if($_SERVER["REQUEST_METHOD"] == "POST")
 	{	
 		$account = json_decode(file_get_contents('php://input'), true);
@@ -27,6 +43,8 @@
 		$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$password."');";
 		
 		pg_query($insert) or die('Insert Failed' . pg_last_error());
+		
+		#sendVerificationEmail("silverhat@live.com", "no-reply@octosurvey", "OctoSurvey", "Sign-Up Verification", "Test");
 		
 		$select = 'SELECT * FROM accounts;';
 		
