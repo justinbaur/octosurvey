@@ -1,5 +1,5 @@
 <?php
-	#require 'vendor/autoload.php';
+	require 'vendor/autoload.php';
 
 	function databaseConnect(){
 		$dbUrl = parse_url($_ENV['DATABASE_URL']);
