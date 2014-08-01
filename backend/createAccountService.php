@@ -17,7 +17,7 @@
 		return $db;
 	}
 
-/*
+
 	function sendVerificationEmail($to, $from, $fromName, $subject, $body){		
 		$sendgrid = new SendGrid('octosurvey', 'octosurveytest', array("turn_off_ssl_verification" => true));
 	
@@ -29,7 +29,7 @@
 		       setText($body);
 		$sendgrid->send($email);
 	}
-*/
+
 	
 	if($_SERVER["REQUEST_METHOD"] == "POST")
 	{	
@@ -40,11 +40,11 @@
 		
 		$conn = databaseConnect();
 		
-		$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$password."');";
+		#$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$password."');";
 		
-		pg_query($insert) or die('Insert Failed' . pg_last_error());
+		#pg_query($insert) or die('Insert Failed' . pg_last_error());
 		
-		#sendVerificationEmail("silverhat@live.com", "no-reply@octosurvey", "OctoSurvey", "Sign-Up Verification", "Test");
+		sendVerificationEmail("silverhat@live.com", "no-reply@octosurvey", "OctoSurvey", "Sign-Up Verification", "Test");
 		
 		$select = 'SELECT * FROM accounts;';
 		
