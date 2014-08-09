@@ -2,8 +2,8 @@
   "name": "OctoSurvey",
   "description": "OctoSurvey Test Application",
   "version": "0.0.1",
-  "homepage": "",
-  "license": "",
+  "homepage": "https://www.octosurvey.com",
+  "license": "MIT",
   "keywords": ["OctoSurvey"],
   "require": {
     "sendgrid/sendgrid": "2.1.1"
