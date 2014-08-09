@@ -8,10 +8,9 @@
 	$options = array(
 	    'api_user'  => 'octosurvey',
 	    'api_key'   => 'octosurveytest',
-	    'to'        => 'silverhat@live.com',
-	    'subject'   => 'Testing Send Grid API',
-	    'html'      => 'Hello, World!',
-	    'text'      => 'This is a test.',
+	    'to'        => 'dustindd64@gmail.com',
+	    'subject'   => 'OctoSurvey Account Verification',
+	    'html'      => 'Please click the following link to verify your account.',
 	    'from'      => 'no-reply@octosurvey.com',
 	  );
 
