@@ -6,7 +6,16 @@
 <?
 	require('vendor/autoload.php');
 
-	$sendgrid = new SendGrid('octosurvey', 'octosurveytest', array("turn_off_ssl_verification" => true));
+	$options = array(
+	  'turn_off_ssl_verification' => false,
+	  'protocol' => 'https',
+	  'host' => 'api.sendgrid.com',
+	  'endpoint' => '/api/mail.send.json',
+	  'port' => null,
+	  'url' => null
+	);
+
+	$sendgrid = new SendGrid('octosurvey', 'octosurveytest', $options);
 
 	$email = new SendGrid\Email();
 	$email->addTo("silverhat@live.com")->
