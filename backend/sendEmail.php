@@ -6,25 +6,33 @@
 <?
 	require 'vendor/autoload.php';
 
+	$url = 'https://api.sendgrid.com/';
 	$options = array(
-	  'turn_off_ssl_verification' => true,
-	  'protocol' => 'http',
-	  'host' => 'sendgrid.org',
-	  'endpoint' => '/send',
-	  'port' => '80',
-	  'url' => null
-	);
+	    'api_user'  => 'octosurvey',
+	    'api_key'   => 'octosurveytest',
+	    'to'        => 'silverhat@live.com',
+	    'subject'   => 'Testing Send Grid API',
+	    'html'      => 'Hello, World!',
+	    'text'      => 'This is a test.',
+	    'from'      => 'no-reply@octosurvey.com',
+	  );
 
-	$sendgrid = new SendGrid('octosurvey', 'octosurveytest', $options);
+	$request = $url.'api/mail.send.json';
+	$session = curl_init($request);
+	// Tell curl to use HTTP POST
+	curl_setopt ($session, CURLOPT_POST, true);
+	// Tell curl that this is the body of the POST
+	curl_setopt ($session, CURLOPT_POSTFIELDS, $options);
+	// Tell curl not to return headers, but do return the response
+	curl_setopt($session, CURLOPT_HEADER, false);
+	curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
 
-	$email = new SendGrid\Email();
-	$email->addTo("silverhat@live.com")->
-	       setFrom("no-reply@octosurvey.com")->
-	       setSubject("Verification Email")->
-	       setText("Test");
-	$response = $sendgrid->send($email);
-	
-	var_dump($response);
+	// obtain response
+	$response = curl_exec($session);
+	curl_close($session);
+
+	// print everything out
+	print_r($response);
 ?>
 
 <p>Hello, World!</p>
