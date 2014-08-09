@@ -4,14 +4,14 @@
 </head>
 <body>
 <?
-	require('vendor/autoload.php');
+	require 'vendor/autoload.php';
 
 	$options = array(
-	  'turn_off_ssl_verification' => false,
-	  'protocol' => 'https',
-	  'host' => 'api.sendgrid.com',
-	  'endpoint' => '/api/mail.send.json',
-	  'port' => null,
+	  'turn_off_ssl_verification' => true,
+	  'protocol' => 'http',
+	  'host' => 'sendgrid.org',
+	  'endpoint' => '/send',
+	  'port' => '80',
 	  'url' => null
 	);
 
