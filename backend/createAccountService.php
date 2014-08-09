@@ -27,34 +27,37 @@
 		       setFromName($fromName)->
 		       setSubject($subject)->
 		       setText($body);
-		$sendgrid->send($email);
+		$response = $sendgrid->send($email);
+		
+		
+		return $response;
 	}
 
 	
 	if($_SERVER["REQUEST_METHOD"] == "POST")
 	{	
-		$account = json_decode(file_get_contents('php://input'), true);
-		$username = pg_escape_string($account['username']);
-		$password = pg_escape_string($account['password']);
-		$email = pg_escape_string($account['email']);
+		#$account = json_decode(file_get_contents('php://input'), true);
+		#$username = pg_escape_string($account['username']);
+		#$password = pg_escape_string($account['password']);
+		#$email = pg_escape_string($account['email']);
 		
-		$conn = databaseConnect();
+		#$conn = databaseConnect();
 		
 		#$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$password."');";
 		
 		#pg_query($insert) or die('Insert Failed' . pg_last_error());
 		
-		sendVerificationEmail("silverhat@live.com", "no-reply@octosurvey", "OctoSurvey", "Sign-Up Verification", "Test");
+		$re = sendVerificationEmail("silverhat@live.com", "no-reply@octosurvey", "OctoSurvey", "Sign-Up Verification", "Test");
 		
-		$select = 'SELECT * FROM accounts;';
+		#$select = 'SELECT * FROM accounts;';
 		
-		$result = pg_query($select) or die("select failed" . pg_last_error());
+		#$result = pg_query($select) or die("select failed" . pg_last_error());
 		
-		$line = pg_fetch_array($result, null, PGSQL_ASSOC);
+		#$line = pg_fetch_array($result, null, PGSQL_ASSOC);
 		
-		pg_free_result($result);
-		pg_close($conn);
-		
-		echo json_encode($line);
+		#pg_free_result($result);
+		#pg_close($conn);
+		echo $re;
+		#echo json_encode($line);
 	}
 ?>
