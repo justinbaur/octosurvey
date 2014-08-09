@@ -4,9 +4,9 @@
 </head>
 <body>
 <?
-	require 'vendor/autoload.php';
+	require('vendor/autoload.php');
 
-	$sendgrid = new SendGrid('octosurvey', 'octosurveytest');
+	$sendgrid = new SendGrid('octosurvey', 'octosurveytest', array("turn_off_ssl_verification" => true));
 
 	$email = new SendGrid\Email();
 	$email->addTo("silverhat@live.com")->
@@ -15,7 +15,7 @@
 	       setText("Test");
 	$response = $sendgrid->send($email);
 	
-	echo $response;
+	var_dump($response);
 ?>
 
 <p>Hello, World!</p>
