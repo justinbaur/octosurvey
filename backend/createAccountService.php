@@ -19,12 +19,11 @@
 
 
 	function sendVerificationEmail($to, $from, $fromName, $subject, $body){		
-		$sendgrid = new SendGrid('octosurvey', 'octosurveytest', array("turn_off_ssl_verification" => true));
+		$sendgrid = new SendGrid('octosurvey', 'octosurveytest');
 	
 		$email = new SendGrid\Email();
 		$email->addTo($to)->
 		       setFrom($from)->
-		       setFromName($fromName)->
 		       setSubject($subject)->
 		       setText($body);
 		$response = $sendgrid->send($email);

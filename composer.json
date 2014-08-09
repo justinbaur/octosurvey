@@ -1,4 +1,10 @@
 {  
+  "name": "OctoSurvey",
+  "description": "OctoSurvey Test Application",
+  "version": "0.0.1",
+  "homepage": "",
+  "license": "",
+  "keywords": ["OctoSurvey"],
   "require": {
     "sendgrid/sendgrid": "2.1.1"
   }
