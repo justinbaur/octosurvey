@@ -3,9 +3,7 @@
 <title>Send Email</title>
 </head>
 <body>
-<?
-	require 'vendor/autoload.php';
-
+<?php
 	$url = 'https://api.sendgrid.com/';
 	$options = array(
 	    'api_user'  => 'octosurvey',
