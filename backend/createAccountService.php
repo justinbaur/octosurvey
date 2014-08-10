@@ -1,6 +1,4 @@
 <?php
-	require 'vendor/autoload.php';
-
 	function databaseConnect(){
 		$dbUrl = parse_url($_ENV['DATABASE_URL']);
 
@@ -18,16 +16,27 @@
 	}
 
 
-	function sendVerificationEmail($to, $from, $fromName, $subject, $body){		
-		$sendgrid = new SendGrid('octosurvey', 'octosurveytest');
-	
-		$email = new SendGrid\Email();
-		$email->addTo($to)->
-		       setFrom($from)->
-		       setSubject($subject)->
-		       setText($body);
-		$response = $sendgrid->send($email);
-		
+	function sendVerificationEmail($to, $from, $subject, $body){		
+		$url = 'https://api.sendgrid.com/';
+		$options = array(
+		    'api_user'  => $_ENV['SENDGRID_USERNAME'],
+		    'api_key'   => $_ENV['SENDGRID_KEY'],
+		    'to'        => $to,
+		    'subject'   => $subject,
+		    'html'      => $body,
+		    'from'      => $from
+		  );
+
+		$request = $url.'api/mail.send.json';
+		$session = curl_init($request);
+
+		curl_setopt ($session, CURLOPT_POST, true);
+		curl_setopt ($session, CURLOPT_POSTFIELDS, $options);
+		curl_setopt($session, CURLOPT_HEADER, false);
+		curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+
+		$response = curl_exec($session);
+		curl_close($session);
 		
 		return $response;
 	}
@@ -35,28 +44,26 @@
 	
 	if($_SERVER["REQUEST_METHOD"] == "POST")
 	{	
-		#$account = json_decode(file_get_contents('php://input'), true);
-		#$username = pg_escape_string($account['username']);
-		#$password = pg_escape_string($account['password']);
-		#$email = pg_escape_string($account['email']);
+		$account = json_decode(file_get_contents('php://input'), true);
 		
-		#$conn = databaseConnect();
+		$username = pg_escape_string($account['username']);
+		$password = pg_escape_string($account['password']);
+		$email = pg_escape_string($account['email']);
 		
-		#$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$password."');";
+		$conn = databaseConnect();
 		
-		#pg_query($insert) or die('Insert Failed' . pg_last_error());
+		$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$password."');";
 		
-		$re = sendVerificationEmail("silverhat@live.com", "no-reply@octosurvey", "OctoSurvey", "Sign-Up Verification", "Test");
+		pg_query($insert) or die('Insert Failed' . pg_last_error());
 		
-		#$select = 'SELECT * FROM accounts;';
+		$response = sendVerificationEmail(
+			$email, 
+			"no-reply@octosurvey", 
+			"OctoSurvey Account Verification", 
+			"Hello " . $username . ", Please click the following link to verify your email.");
 		
-		#$result = pg_query($select) or die("select failed" . pg_last_error());
+		pg_close($conn);
 		
-		#$line = pg_fetch_array($result, null, PGSQL_ASSOC);
-		
-		#pg_free_result($result);
-		#pg_close($conn);
-		echo $re;
-		#echo json_encode($line);
+		echo json_encode($response);
 	}
 ?>

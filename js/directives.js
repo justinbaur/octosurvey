@@ -20,6 +20,23 @@ angular.module('octosurvey.directives', []).directive('uniqueid', function($http
 			});
 		}
 	}
+}).directive('uniqueemail', function($http){
+	return {
+		require: 'ngModel',
+		link: function(scope, ele, attrs, value){
+			scope.$watch(attrs.ngModel, function(){
+				$http({
+					method: 'POST',
+					url:	'backend/uniqueEmail.php',
+					data: {'field': attrs.uniqueid}
+				}).success(function(data, status, headers, cfg){
+					value.$setValidity('emailunique', data.isUnique);
+				}).error(function(data, status, headers, cfg){
+					value.$setValidity('emailunique', false);
+				});
+			});
+		}
+	}
 }).directive('passwordformvalidation', function() {
   return {
     restrict: 'A', // only activate on element attribute

@@ -1,4 +1,4 @@
-<div id="createDisplay">
+<div ng-show="activeCreate" id="createDisplay">
 	<p>Create an Account!</p>
 	<form novalidate class="accountCreate" name="accountCreate">		
 		<input type="text" id="username" name="username" placeholder="Name" ng-model="account.username" required uniqueid="{{account.username}}" />
@@ -7,11 +7,12 @@
 		</div>
 		<div ng-show="accountCreate.username.$error.unique">Name not unique!</div>	
 		
-		<input type="email" id="email" name="email" placeholder="E-mail" ng-model="account.email" required />
+		<input type="email" id="email" name="email" placeholder="E-mail" ng-model="account.email" required uniqueemail="{{account.email}}" />
 		<div ng-show="accountCreate.email.$dirty && accountCreate.email.$invalid">
 			<span ng-show="accountCreate.email.$error.required">E-mail required!</span>	
 			<span ng-show="accountCreate.email.$error.email">This is not a valid E-mail!</span>
 		</div>
+		<div ng-show="accountCreate.email.$error.emailunique">E-mail already in use!</div>	
 		
 		<input type="password" id="password" name="password" placeholder="Password" ng-model="account.password" required passwordformvalidation="{{account.confirm_password}}" />
 		<div ng-show="accountCreate.password.$error.required">Password required!</div>
@@ -26,4 +27,7 @@
 	<pre>pre processing data: {{preproc}}</pre>
 	<pre>http response code: {{status}}</pre>
 	<pre>http reponse data: {{data}}</pre>
+</div>
+<div ng-show="activeSuccess" id="creationSucessDisplay">
+	<p>Thank you for creating an account with OctoSurvey, please check your E-mail for verification.</p>
 </div>

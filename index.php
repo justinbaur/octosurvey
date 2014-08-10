@@ -21,7 +21,6 @@
 	<div class="header">
 		<img id="logo" ng-src="img/OctoBanner.jpg" />
 	</div>
-	<h1>SendGrid</h1>
 	<?php 
 		$alreadyLogged = false;
 		$correctlyLogged = false;
