@@ -50,17 +50,33 @@
 		$password = pg_escape_string($account['password']);
 		$email = pg_escape_string($account['email']);
 		
+		$hash = md5( rand(0, 1000) );
+		$active = false;
+		
 		$conn = databaseConnect();
 		
-		$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$password."');";
+		$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$password."','".$hash."',".$active.");";
 		
 		pg_query($insert) or die('Insert Failed' . pg_last_error());
+		
+		$activateUrl = "https://octosurvey.herokuapp.com/verify.php?email='.$email.'&hash='.$hash.'";
 		
 		$response = sendVerificationEmail(
 			$email, 
 			"no-reply@octosurvey", 
 			"OctoSurvey Account Verification", 
-			"Hello " . $username . ", Please click the following link to verify your email.");
+			"Hello " . $username . ", Thank you for signing up!
+			
+			<br/>
+			<br/>
+			
+			Your account has been created, please click the following link to activate your account.
+			
+			<br/>
+			
+			<a href='".$activateUrl."'>Activate your Account!</a>
+			
+			");
 		
 		pg_close($conn);
 		
