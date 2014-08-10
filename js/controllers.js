@@ -7,7 +7,9 @@ angular.module('octosurvey.controllers', [])
 
   }])
   .controller('CreateAccountController', ['$scope','$http', function($scope, $http) {
-  	
+  	$scope.activeCreate = true;
+ 	$scope.activeSuccess = false;
+ 	
 	$scope.createAccount = function(account) {
 		/* Call to PHP Service to insert into account */
 		$scope.preproc = account;
