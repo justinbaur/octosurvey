@@ -58,7 +58,7 @@
 		
 		pg_query($insert) or die('Insert Failed' . pg_last_error());
 		
-		$activateUrl = "https://octosurvey.herokuapp.com/verify.php?email='.$email.'&hash='.$hash.'";
+		$activateUrl = "https://octosurvey.herokuapp.com/verify.php?email=".$email."&hash=".$hash.;
 		
 		$response = sendVerificationEmail(
 			$email, 

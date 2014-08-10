@@ -17,6 +17,9 @@
 	}
 	$conn = databaseConnect();
 
+	$q = "DROP TABLE accounts;";	
+	pg_query($q) or die('drop Failed' . pg_last_error());
+		
 	$q = 'CREATE TABLE accounts (
 			email varchar(40) CONSTRAINT firstkey PRIMARY KEY,
 			username varchar(20) NOT NULL,
