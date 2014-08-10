@@ -4,8 +4,5 @@
   "version": "0.0.1",
   "homepage": "https://www.octosurvey.com",
   "license": "MIT",
-  "keywords": ["OctoSurvey"],
-  "require": {
-    "sendgrid/sendgrid": "2.1.1"
-  }
+  "keywords": ["OctoSurvey"]
 }

@@ -51,11 +51,10 @@
 		$email = pg_escape_string($account['email']);
 		
 		$hash = md5( rand(0, 1000) );
-		$active = false;
 		
 		$conn = databaseConnect();
 		
-		$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$password."','".$hash."',".$active.");";
+		$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$password."','".$hash."',FALSE);";
 		
 		pg_query($insert) or die('Insert Failed' . pg_last_error());
 		
