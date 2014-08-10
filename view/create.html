@@ -23,11 +23,12 @@
 		
 		<button ng-click="accountCreate.$valid && createAccount(account)" type="submit" id="createaccount" name="createaccount">Create Account</button>
 	</form>
-	
-	<pre>pre processing data: {{preproc}}</pre>
-	<pre>http response code: {{status}}</pre>
-	<pre>http reponse data: {{data}}</pre>
 </div>
 <div ng-show="activeSuccess" id="creationSucessDisplay">
 	<p>{{creationResponse}}</p>
+</div>
+<div id="dev">
+	<pre>pre processing data: {{preproc}}</pre>
+	<pre>http response code: {{status}}</pre>
+	<pre>http reponse data: {{data}}</pre>
 </div>

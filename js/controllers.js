@@ -23,14 +23,16 @@ angular.module('octosurvey.controllers', [])
 					$scope.activeCreate = false;
  					$scope.activeSuccess = true; 					
  					$scope.creationResponse = "Thank you for creating an account with OctoSurvey, please check your E-mail for verification.";
- 					$scope.$apply();
+				}else{
+					$scope.data = data;
+					$scope.status = status;		
+					$scope.creationResponse = "There was a problem creating your account.";		
 				}
 			}).
 			error(function(data, status){
 				$scope.data = data;
 				$scope.status = status;		
-				$scope.creationResponse = "There was a problem creating your account.";	
-				$scope.$apply();	
+				$scope.creationResponse = "There was a problem creating your account.";		
 			});
 	};
   }])
