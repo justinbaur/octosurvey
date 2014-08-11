@@ -28,7 +28,7 @@
 	
 	$raw = pg_fetch_array($result, null, PGSQL_ASSOC);	
 	
-	#$unescaped = pg_unescaped_bytea($raw);
+	$unescaped = pg_unescaped_bytea($raw["password"]);
 	
 	#$answer = "????";
 	
@@ -42,7 +42,7 @@
 
 	pg_close($conn);
 	
-	echo '<p>'.$raw["password"].'</p>';
+	echo '<p>'.$unescaped.'</p>';
 ?>
 </body>
 </html>
