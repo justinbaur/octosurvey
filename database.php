@@ -22,10 +22,11 @@
 		
 	$q = 'CREATE TABLE accounts (
 			email varchar(40) CONSTRAINT firstkey PRIMARY KEY,
-			username varchar(20) NOT NULL,
-			password varchar(20) NOT NULL,
+			username varchar(40) NOT NULL,
+			password bytea NOT NULL,
 			hash varchar(40) NOT NULL,
-			active boolean NOT NULL
+			active boolean NOT NULL,
+			iv bytea
 			);';
 	pg_query($q) or die('create Failed' .pg_last_error());
 	pg_close($conn);

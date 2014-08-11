@@ -1,4 +1,6 @@
 <?php
+	include 'encryption_module.php';
+	
 	function databaseConnect(){
 		$dbUrl = parse_url($_ENV['DATABASE_URL']);
 
@@ -53,8 +55,10 @@
 		$hash = md5( rand(0, 1000) );
 		
 		$conn = databaseConnect();
-		
-		$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$password."','".$hash."',FALSE);";
+
+		$escapedPassword = pg_escape_bytea(hashEncryption($password));
+		 
+		$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$escapedPassword."','".$hash."',FALSE);";
 		
 		pg_query($insert) or die('Insert Failed' . pg_last_error());
 		
@@ -62,7 +66,7 @@
 		
 		$response = sendVerificationEmail(
 			$email, 
-			"no-reply@octosurvey", 
+			"no-reply@octosurvey.com", 
 			"OctoSurvey Account Verification", 
 			"Hello " . $username . ", Thank you for signing up!
 			
