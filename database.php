@@ -16,18 +16,26 @@
 		return $db;
 	}
 	$conn = databaseConnect();
-
-	$q = "DROP TABLE accounts;";	
-	pg_query($q) or die('drop Failed' . pg_last_error());
+	
+	$select = 'SELECT password FROM accounts WHERE username=Justin;';
 		
-	$q = 'CREATE TABLE accounts (
-			email varchar(40) CONSTRAINT firstkey PRIMARY KEY,
-			username varchar(40) NOT NULL,
-			password bytea NOT NULL,
-			hash varchar(40) NOT NULL,
-			active boolean NOT NULL,
-			iv bytea
-			);';
-	pg_query($q) or die('create Failed' .pg_last_error());
+	$result = pg_query($select) or die("select failed" . pg_last_error());
+	
+	$raw = pg_fetch_array($result, 'password');	
+	
+	$unescaped = pg_unescaped_bytea($raw);
+	
+	$answer = "";
+	
+	if(password_verify("justin", $unescaped)){
+		$answer = "true";
+	}else{
+		$answer = "false";
+	}
+	
+	pg_free_result($result);
+
 	pg_close($conn);
+	
+	echo $answer;
 ?>
