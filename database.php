@@ -28,21 +28,21 @@
 	
 	$raw = pg_fetch_array($result, null, PGSQL_ASSOC);	
 	
-	$unescaped = pg_unescaped_bytea($raw["password"]);
+	$unescaped = pg_unescape_bytea($raw["password"]);
 	
-	#$answer = "????";
+	$answer = "????";
 	
-	#if(password_verify("justin", $unescaped)){
-	#	$answer = "true";
-	#}else{
-	#	$answer = "false";
-	#}
+	if(password_verify("justin", $unescaped)){
+		$answer = "true";
+	}else{
+		$answer = "false";
+	}
 	
 	pg_free_result($result);
 
 	pg_close($conn);
 	
-	echo '<p>'.$unescaped.'</p>';
+	echo '<p>'.$unescaped.'</p><p>'.$answer.'</p>';
 ?>
 </body>
 </html>
