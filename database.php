@@ -42,7 +42,7 @@
 
 	pg_close($conn);
 	
-	echo '<p>'.$raw.'</p>';
+	echo '<p>'.$raw["password"].'</p>';
 ?>
 </body>
 </html>
