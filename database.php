@@ -17,7 +17,7 @@
 	}
 	$conn = databaseConnect();
 	
-	$select = 'SELECT password FROM accounts WHERE username=Justin;';
+	$select = "SELECT password FROM accounts WHERE username='Justin';";
 		
 	$result = pg_query($select) or die("select failed" . pg_last_error());
 	
