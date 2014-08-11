@@ -26,7 +26,7 @@
 		
 	$result = pg_query($select) or die("select failed" . pg_last_error());
 	
-	$raw = pg_fetch_array($result, 'password');	
+	$raw = pg_fetch_array($result, null, PGSQL_ASSOC);	
 	
 	#$unescaped = pg_unescaped_bytea($raw);
 	
