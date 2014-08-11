@@ -1,3 +1,8 @@
+<html>
+<head>
+</head>
+<body>
+<p>
 <?php
 
 	function databaseConnect(){
@@ -25,7 +30,7 @@
 	
 	$unescaped = pg_unescaped_bytea($raw);
 	
-	$answer = "";
+	$answer = "????";
 	
 	if(password_verify("justin", $unescaped)){
 		$answer = "true";
@@ -39,3 +44,6 @@
 	
 	echo $answer;
 ?>
+</p>
+</body>
+</html>
