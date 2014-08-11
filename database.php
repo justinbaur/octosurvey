@@ -2,7 +2,6 @@
 <head>
 </head>
 <body>
-<p>
 <?php
 
 	function databaseConnect(){
@@ -20,6 +19,7 @@
 		
 		return $db;
 	}
+	
 	$conn = databaseConnect();
 	
 	$select = "SELECT password FROM accounts WHERE username='Justin';";
@@ -28,22 +28,21 @@
 	
 	$raw = pg_fetch_array($result, 'password');	
 	
-	$unescaped = pg_unescaped_bytea($raw);
+	#$unescaped = pg_unescaped_bytea($raw);
 	
-	$answer = "????";
+	#$answer = "????";
 	
-	if(password_verify("justin", $unescaped)){
-		$answer = "true";
-	}else{
-		$answer = "false";
-	}
+	#if(password_verify("justin", $unescaped)){
+	#	$answer = "true";
+	#}else{
+	#	$answer = "false";
+	#}
 	
 	pg_free_result($result);
 
 	pg_close($conn);
 	
-	echo $answer;
+	echo '<p>'.$raw.'</p>';
 ?>
-</p>
 </body>
 </html>
