@@ -59,7 +59,7 @@
 
 		$escapedPassword = pg_escape_bytea(hashEncryption($password));
 		 
-		$insert = "INSERT INTO Accounts VALUES('".$username."','".$escapedPassword."','".$email."','".$role."','".$hash."',FALSE);";
+		$insert = "INSERT INTO Accounts (username, password, email, role, hash, active) VALUES('".$username."','".$escapedPassword."','".$email."','".$role."','".$hash."',FALSE);";
 		
 		pg_query($insert) or die('Insert Failed' . pg_last_error());
 		
