@@ -64,7 +64,7 @@
 						$_SESSION["valid"] = false;	
 						$status = "Sorry, Your account has not been activated yet.";
 					}else{	
-						echo hashEncryption($pass) . ":";
+						#echo hashEncryption($pass) . ":";
 						echo pg_unescape_bytea($line["password"]);
 						
 						#if(hashEncryption($pass) == pg_unescape_bytea($line["password"])){
