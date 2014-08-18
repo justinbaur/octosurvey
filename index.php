@@ -41,8 +41,8 @@
 		}
 	
 		$correctlyLogged = false;
-		$_SESSION["valid"] = false;
 		$status = "";
+		$role = "";
 		
 		if($_SERVER["REQUEST_METHOD"] == "POST"){		
 			#Login
@@ -60,20 +60,24 @@
 
 				if(pg_num_rows($result) > 0){
 					$line = pg_fetch_array($result, null, PGSQL_ASSOC);		
-					
+									
 					if($line["active"] == "FALSE"){
+						$_SESSION["valid"] = false;	
 						$status = "Sorry, Your account has not been activated yet.";
 					}else{	
 						if(hashEncryption($pass) == pg_unescape_bytea($line["password"])){
 							$correctlyLogged = true;
 							$_SESSION["valid"] = true;
+							
 							$role = $line["role"];
 							$status = "Welcome, " . $_POST["username"];
 						}else{
+							$_SESSION["valid"] = false;	
 							$status = "Sorry, The password you provided is invalid";				
 						}
 					}
 				}else{
+					$_SESSION["valid"] = false;					
 					$status = "Sorry, Could not find the username you provided.";				
 				}
 				
