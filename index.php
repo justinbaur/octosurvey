@@ -63,20 +63,17 @@
 					if($line["active"] == "f"){
 						$_SESSION["valid"] = false;	
 						$status = "Sorry, Your account has not been activated yet.";
-					}else{	
-						echo hashEncryption($pass) . ":";
-						echo pg_unescape_bytea($line["password"]);
-						
-						#if(hashEncryption($pass) == pg_unescape_bytea($line["password"])){
-						#	$correctlyLogged = true;
-						#	$_SESSION["valid"] = true;
+					}else{							
+						if(password_verify($pass, pg_unescape_bytea($line["password"]))){
+							$correctlyLogged = true;
+							$_SESSION["valid"] = true;
 							
-						#	$role = $line["role"];
-						#	$status = "Welcome, " . $_POST["username"];
-						#}else{
-						#	$_SESSION["valid"] = false;	
-						#	$status = "Sorry, The password you provided is invalid";				
-						#}
+							$role = $line["role"];
+							$status = "Welcome, " . $_POST["username"];
+						}else{
+							$_SESSION["valid"] = false;	
+							$status = "Sorry, The password you provided is invalid";				
+						}
 					}
 				}else{
 					$_SESSION["valid"] = false;					
