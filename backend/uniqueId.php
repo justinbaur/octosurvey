@@ -22,7 +22,7 @@
 
 		$conn = databaseConnect();	
 					
-		$select = "SELECT username FROM accounts WHERE username='".$username."';";
+		$select = "SELECT username FROM Accounts WHERE username='".$username."';";
 		
 		$result = pg_query($select) or die("select failed" . pg_last_error());
 		

@@ -26,7 +26,7 @@
 	<p>Successfully Logged Out!</p>
 	<ul class="menu">
 	    <li><a href="index.php">Home</a></li>
-	    <li><a href="#/CreateAccount">Create Account</a></li>
+	    <li><a href="#/DistributorRegistration">Register as a survey distributor</a></li>
 	    <li><a href="#/Membership">Become A Member</a></li>
 	    <li><a href="#/Support">Support</a></li>
 	    <li><a href="#/About">About Us</a></li>    

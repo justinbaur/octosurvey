@@ -22,7 +22,7 @@
 
 		$conn = databaseConnect();	
 					
-		$select = "SELECT email FROM accounts WHERE email='".$email."';";
+		$select = "SELECT email FROM Accounts WHERE email='".$email."';";
 		
 		$result = pg_query($select) or die("select failed" . pg_last_error());
 		

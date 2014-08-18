@@ -46,7 +46,7 @@
 		
 		if($_SERVER["REQUEST_METHOD"] == "POST"){		
 			#Login
-			if($_SESSION["valid"] == true){
+			if($_SESSION["adminValid"] == true){
 				$correctlyLogged = true;
 			}else{
 				$user = pg_escape_string($_POST["username"]);
@@ -63,23 +63,23 @@
 					
 					if($line["active"] == "FALSE"){
 						$correctlyLogged = false;
-						$_SESSION["valid"] == false;
+						$_SESSION["adminValid"] == false;
 						$status = "Sorry, Your account has not been activated yet.";
 					}else{	
 						if(hashEncryption($pass) == pg_unescape_bytea($line["password"])){
 							$correctlyLogged = true;
-							$_SESSION["valid"] == true;
+							$_SESSION["adminValid"] == true;
 							$role = $line["role"];
 							$status = "Welcome, " . $_POST["username"];
 						}else{
 							$correctlyLogged = false;
-							$_SESSION["valid"] == false;
+							$_SESSION["adminValid"] == false;
 							$status = "Sorry, The password you provided is invalid";				
 						}
 					}
 				}else{
 					$correctlyLogged = false;
-					$_SESSION["valid"] == false;
+					$_SESSION["adminValid"] == false;
 					$status = "Sorry, Could not find the username you provided.";				
 				}
 				
@@ -92,42 +92,13 @@
 	<div id="statusbox">
 		Status: <?= $status ?>
 	</div>
-	<?php	
-		if($correctlyLogged == true){ 
-			if($role == "Distributor"){
-	?>	
+	<?php	if($correctlyLogged == true){ ?>
 			<ul class="menu">
-			    <li><a href="#/">Home</a></li>
-			    <li><a href="#/SurveyOffers">Survey Offers</a></li>			    
-			    <li><a href="#/Support">Support</a></li>
-			    <li><a href="#/About">About Us</a></li>    
+			    <li><a href="adminConsole.php">Admin Console</a></li>
 			</ul>
-
-		<?php 	} else if($role == "Member"){ ?>
-			<ul class="menu">
-			    <li><a href="#/">Home</a></li>
-			    <li><a href="#/MemberProfile">Member Profile</a></li>
-			    <li><a href="#/MemberSurveys">Surveys</a></li>
-			    <li><a href="#/Support">Support</a></li>
-			    <li><a href="#/About">About Us</a></li>    
-			</ul>
-		<?php 	} else{ ?>	
-			<ul class="menu">
-			    <li><a href="#/">Home</a></li>
-			    <li><a href="#/Support">Support</a></li>
-			    <li><a href="#/About">About Us</a></li>    
-			</ul>
-		<?php 	} ?>
+			
 			<a href="logout.php" id="logoutButton">Logout</a>
-	<?php 	} else{ ?>
-			<ul class="menu">
-			    <li><a href="#/">Home</a></li>
-			    <li><a href="#/DistributorRegistration">Register as a survey distributor</a></li>
-			    <li><a href="#/Membership">Become A Member</a></li>
-			    <li><a href="#/Support">Support</a></li>
-			    <li><a href="#/About">About Us</a></li>    
-			</ul>
-		
+	<?php 	} else{ ?>	
 			<?php include("view/authentication.html"); ?> 
 	<?php 	} ?>
 	

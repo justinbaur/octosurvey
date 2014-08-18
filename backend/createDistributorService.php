@@ -51,6 +51,7 @@
 		$username = pg_escape_string($account['username']);
 		$password = pg_escape_string($account['password']);
 		$email = pg_escape_string($account['email']);
+		$role = "Distributor";
 		
 		$hash = md5( rand(0, 1000) );
 		
@@ -58,7 +59,7 @@
 
 		$escapedPassword = pg_escape_bytea(hashEncryption($password));
 		 
-		$insert = "INSERT INTO accounts VALUES('".$email."','".$username."','".$escapedPassword."','".$hash."',FALSE);";
+		$insert = "INSERT INTO Accounts VALUES('".$username."','".$escapedPassword."','".$email."','".$role."','".$hash."',FALSE);";
 		
 		pg_query($insert) or die('Insert Failed' . pg_last_error());
 		

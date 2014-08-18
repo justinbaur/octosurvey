@@ -1,7 +1,7 @@
 <div ng-show="activeCreate" id="createDisplay">
 	<p>Create an Account!</p>
 	<form novalidate class="accountCreate" name="accountCreate">		
-		<input type="text" id="username" name="username" placeholder="Name" ng-model="account.username" required uniqueid="{{account.username}}" />
+		<input type="text" id="username" name="username" placeholder="Username" ng-model="account.username" required uniqueid="{{account.username}}" />
 		<div ng-show="accountCreate.username.$dirty && accountCreate.username.$invalid">
 			<span ng-show="accountCreate.username.$error.required">Name required!</span>
 		</div>
@@ -20,7 +20,7 @@
 		<input type="password" id="confirmpassword" name="confirmpassword" placeholder="Re-type Password" ng-model="account.confirm_password" required passwordformvalidation="{{account.password}}" />
 		<div ng-show="accountCreate.confirmpassword.$error.required">Confirmation Password required!</div>		
 		<div ng-show="accountCreate.password.$error.passwordvalidationflag">{{passwordvalidation}}</div>
-		
+				
 		<button ng-click="accountCreate.$valid && createAccount(account)" type="submit" id="createaccount" name="createaccount">Create Account</button>
 	</form>
 </div>
