@@ -25,7 +25,10 @@
 	$q = "DROP TABLE IF EXISTS Accounts;";	
 	pg_query($q) or die('drop Failed' . pg_last_error());
 		
-	$q = "DROP TABLE IF EXISTS accounts;";	
+	$q = "DROP TABLE IF EXISTS Member;";	
+	pg_query($q) or die('drop Failed' . pg_last_error());
+	
+	$q = "DROP TABLE IF EXISTS Distributor;";	
 	pg_query($q) or die('drop Failed' . pg_last_error());
 	
 	$a = 'CREATE TABLE Accounts (

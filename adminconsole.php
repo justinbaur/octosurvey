@@ -88,7 +88,7 @@
 			}
 		}
 	?>
-	
+	<h2>Admin Console</h2>
 	<div id="statusbox">
 		Status: <?= $status ?>
 	</div>
@@ -99,7 +99,7 @@
 			
 			<a href="logout.php" id="logoutButton">Logout</a>
 	<?php 	} else{ ?>	
-			<?php include("view/authentication.html"); ?> 
+			<?php include("view/adminauthentication.html"); ?> 
 	<?php 	} ?>
 	
 	<div ng-view></div>

@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="header">
-		<img id="logo" ng-src="img/OctoBanner.jpg" />
+		<img id="logo" src="img/OctoBanner.jpg" />
 	</div>
 		<ul class="menu">
 		    <li><a href="https://octosurvey.herokuapp.com">Home</a></li>
