@@ -22,7 +22,7 @@
 		<img id="logo" ng-src="img/OctoBanner.jpg" />
 	</div>
 	<?php 
-		include 'encryption_module.php';
+		include 'backend/encryption_module.php';
 	
 		function databaseConnect(){
 			$dbUrl = parse_url($_ENV['DATABASE_URL']);
@@ -64,7 +64,7 @@
 						$_SESSION["valid"] = false;	
 						$status = "Sorry, Your account has not been activated yet.";
 					}else{	
-						#echo hashEncryption($pass) . ":";
+						echo hashEncryption($pass) . ":";
 						echo pg_unescape_bytea($line["password"]);
 						
 						#if(hashEncryption($pass) == pg_unescape_bytea($line["password"])){
